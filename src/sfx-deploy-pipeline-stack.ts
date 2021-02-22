@@ -133,7 +133,7 @@ export class SfxDeployPipelineStack extends Stack {
             value: `/all/sfx/ftp/${namespace}/path`,
             type: codebuild.BuildEnvironmentVariableType.PARAMETER_STORE,
           },
-          HOSTNAME: {
+          REMOTE_HOST: {
             value: `/all/sfx/ftp/hostname`,
             type: codebuild.BuildEnvironmentVariableType.PARAMETER_STORE,
           },
@@ -205,12 +205,6 @@ export class SfxDeployPipelineStack extends Stack {
       project: testSmokeTest,
       actionName: 'SmokeTests',
       runOrder: 98,
-      environmentVariables: {
-        REMOTE_PATH: {
-          value: `/all/sfx/ftp/test/smokepath`,
-          type: codebuild.BuildEnvironmentVariableType.PARAMETER_STORE,
-        },
-      }
     })
 
     const prodSmokeTestsAction = new CodeBuildAction({
@@ -218,17 +212,11 @@ export class SfxDeployPipelineStack extends Stack {
       project: prodSmokeTest,
       actionName: 'SmokeTests',
       runOrder: 99,
-      environmentVariables: {
-        REMOTE_PATH: {
-          value: ``,
-          type: codebuild.BuildEnvironmentVariableType.PLAINTEXT,
-        },
-      }
     })
 
     const slackApprovalAction = new ManualApprovalAction({
       actionName: 'ManualApproval',
-      additionalInformation: `A new version of https://github.com/ndlib/sfx has been deployed to https://>SFX_ADDRESS_HERE< and is awaiting your approval. If you approve these changes, they will be deployed to https://>SFX_ADDRESS_HERE<.`,
+      additionalInformation: `A new version of https://github.com/ndlib/sfx has been deployed to https://findtext.library.nd.edu/ndu_test and is awaiting your approval. If you approve these changes, they will be deployed to https://findtext.library.nd.edu/ndu_local.`,
       notificationTopic: approvalTopic,
       runOrder: 99,
     })
