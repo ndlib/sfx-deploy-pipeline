@@ -1,0 +1,27 @@
+{
+    "environments": {
+        "dev": {
+            "account": "333680067100",
+            "region": "us-east-1",
+            "notifyStackName": "slack-cd-approvals-test-notifier"
+        },
+        "prod": {
+            "account": "230391840102",
+            "region": "us-east-1",
+            "notifyStackName": "serverlessrepo-ILLiad-Slack-Approval-Bot-Notifier"
+        }
+    },
+    "env": "dev",
+    "stackType": "service",
+    "owner": "Justin Rittenhouse",
+    "contact": "jrittenh@nd.edu",
+    "projectName": "sfx-deploy",
+    "description": "Deployment pipeline for SFX web files",
+    "oauthTokenPath": "/all/github/ndlib-git",
+    "namespace": "nifi",
+    "sourceRepoOwner": "ndlib",
+    "sourceRepository": "sfx",
+    "sourceBranch": "main",
+    "networkStackName": "unpeered-network",
+    "notifyStackName": "slack-cd-approvals-test-notifier"
+}
