@@ -119,7 +119,7 @@ export class SfxDeployPipelineStack extends Stack {
           phases: {
             build: {
               commands: [
-                `newman run spec/SFX.postman_collection.json --folder Smoke --env-var hostname=$HOSTNAME --env-var env=$REMOTE_PATH`,
+                `newman run spec/SFX.postman_collection.json --folder Smoke --env-var hostname=$REMOTE_HOST --env-var env=$REMOTE_PATH`,
               ],
             },
           },
