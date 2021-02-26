@@ -4,6 +4,7 @@ import { GitHubSourceAction, CodeBuildAction, ManualApprovalAction } from '@aws-
 import { Vpc, SecurityGroup } from '@aws-cdk/aws-ec2'
 import { PolicyStatement } from '@aws-cdk/aws-iam'
 import { Topic } from '@aws-cdk/aws-sns'
+import { Secret } from '@aws-cdk/aws-secretsmanager'
 import { Construct, Fn, SecretValue, Stack, StackProps } from '@aws-cdk/core'
 import { ArtifactBucket, SlackApproval } from '@ndlib/ndlib-cdk'
 
@@ -126,7 +127,9 @@ export class SfxDeployPipelineStack extends Stack {
           version: '0.2',
         }),
         environment: {
-          buildImage: codebuild.LinuxBuildImage.fromDockerRegistry('postman/newman'),
+          buildImage: codebuild.LinuxBuildImage.fromDockerRegistry('postman/newman', {
+            secretsManagerCredentials: Secret.fromSecretNameV2(this, `${namespace}-DockerhubCredentials`, '/all/dockerhub/credentials'),
+          }),
         },
         environmentVariables: {
           REMOTE_PATH: {
