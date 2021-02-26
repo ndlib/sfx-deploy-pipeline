@@ -119,7 +119,7 @@ export class SfxDeployPipelineStack extends Stack {
           phases: {
             build: {
               commands: [
-                `newman run spec/SFX.postman_collection.json --folder Smoke --env-var hostname=$REMOTE_HOST --env-var env=$REMOTE_PATH`,
+                `newman run spec/SFX.postman_collection.json --folder Smoke --env-var REMOTE_HOST=$REMOTE_HOST --env-var REMOTE_PATH=$REMOTE_PATH`,
               ],
             },
           },
@@ -130,11 +130,11 @@ export class SfxDeployPipelineStack extends Stack {
         },
         environmentVariables: {
           REMOTE_PATH: {
-            value: `/all/sfx/ftp/${namespace}/path`,
+            value: `/all/sfx/web/${namespace}/path`,
             type: codebuild.BuildEnvironmentVariableType.PARAMETER_STORE,
           },
           REMOTE_HOST: {
-            value: `/all/sfx/ftp/hostname`,
+            value: `/all/sfx/web/hostname`,
             type: codebuild.BuildEnvironmentVariableType.PARAMETER_STORE,
           },
         }
@@ -167,7 +167,7 @@ export class SfxDeployPipelineStack extends Stack {
         'ssm:GetParameters',
       ],
       resources: [
-        Fn.sub('arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/all/sfx/ftp/*'),
+        Fn.sub('arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/all/sfx/web/*'),
       ],
     }))
 
@@ -177,7 +177,7 @@ export class SfxDeployPipelineStack extends Stack {
         'ssm:GetParameters',
       ],
       resources: [
-        Fn.sub('arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/all/sfx/ftp/*'),
+        Fn.sub('arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/all/sfx/web/*'),
       ],
     }))
 
