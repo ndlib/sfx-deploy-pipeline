@@ -83,7 +83,13 @@ export class SfxDeployPipelineStack extends Stack {
             build: {
               commands: [
                 'apt-get update -qq',
-                'apt-get install -y rsync ftp sshpass netcat',
+                'apt-get install -y rsync',
+                'curl -sS ifconfig.co',
+                'curl -sSI $REMOTE_HOST',
+                'pwd',
+                'cd $CODEBUILD_SRC_DIR/',
+                'pwd',
+                // 'rsync -a -e "ssh -p 10008" $LOCAL_PATH/ $REMOTE_USER@$REMOTE_HOST:$REMOTE_PATH',
               ]
             }
           },
@@ -94,6 +100,10 @@ export class SfxDeployPipelineStack extends Stack {
           computeType: codebuild.ComputeType.SMALL,
         },
         environmentVariables: {
+          LOCAL_PATH: {
+            value: `/all/sfx/ftp/localpath`,
+            type: codebuild.BuildEnvironmentVariableType.PARAMETER_STORE,
+          },
           REMOTE_HOST: {
             value: `/all/sfx/ftp/hostname`,
             type: codebuild.BuildEnvironmentVariableType.PARAMETER_STORE,
