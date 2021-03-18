@@ -89,7 +89,7 @@ export class SfxDeployPipelineStack extends Stack {
                 'pwd',
                 'cd $CODEBUILD_SRC_DIR/',
                 'pwd',
-                // 'rsync -a -e "ssh -p 10008" $LOCAL_PATH/ $REMOTE_USER@$REMOTE_HOST:$REMOTE_PATH',
+                'rsync -a -e "ssh -p 10008" $LOCAL_PATH/ $REMOTE_USER@$REMOTE_HOST:$REMOTE_PATH',
               ]
             }
           },
