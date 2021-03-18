@@ -1,16 +1,4 @@
 {
-    "environments": {
-        "dev": {
-            "account": "333680067100",
-            "region": "us-east-1",
-            "notifyStackName": "slack-cd-approvals-test-notifier"
-        },
-        "prod": {
-            "account": "230391840102",
-            "region": "us-east-1",
-            "notifyStackName": "serverlessrepo-ILLiad-Slack-Approval-Bot-Notifier"
-        }
-    },
     "env": "dev",
     "stackType": "service",
     "owner": "Justin Rittenhouse",
