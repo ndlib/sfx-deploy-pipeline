@@ -43,7 +43,7 @@ describe('SFX Pipeline Stack', () => {
     }))
   })
 
-  test('creates a CodePipeline pipeline', () => {
+  test('creates a CodePipeline pipeline with test and prod deploy steps, including smoke tests', () => {
     const newStack = stack()
     expectCDK(newStack).to(haveResourceLike('AWS::CodePipeline::Pipeline', {
       Stages: [
