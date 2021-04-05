@@ -85,7 +85,6 @@ export class SfxDeployPipelineStack extends Stack {
                 'apt-get update -qq',
                 'apt-get install -y rsync sshpass netcat',
                 'curl -sS ifconfig.co',
-                'curl -sSI $REMOTE_HOST',
                 'pwd',
                 'cd $CODEBUILD_SRC_DIR/',
                 'pwd',
