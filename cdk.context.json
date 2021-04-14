@@ -1,0 +1,14 @@
+{
+    "env": "dev",
+    "stackType": "service",
+    "owner": "Justin Rittenhouse",
+    "contact": "jrittenh@nd.edu",
+    "projectName": "sfx-deploy",
+    "description": "Deployment pipeline for SFX web files",
+    "oauthTokenPath": "/all/github/ndlib-git",
+    "sourceRepoOwner": "ndlib",
+    "sourceRepository": "sfx",
+    "sourceBranch": "main",
+    "networkStackName": "unpeered-network",
+    "notifyStackName": "slack-cd-approvals-test-notifier"
+}
