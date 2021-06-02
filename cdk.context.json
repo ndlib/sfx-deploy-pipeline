@@ -7,6 +7,7 @@
     "description": "Deployment pipeline for SFX web files",
     "oauthTokenPath": "/all/github/ndlib-git",
     "sourceRepoOwner": "ndlib",
+    "sourceRepoUser": "ndlib",
     "sourceRepository": "sfx",
     "sourceBranch": "main",
     "networkStackName": "unpeered-network",

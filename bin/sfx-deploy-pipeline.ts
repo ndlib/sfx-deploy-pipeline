@@ -7,6 +7,7 @@ import { SfxDeployPipelineStack } from '../src/sfx-deploy-pipeline-stack'
 const app = new App()
 const oauthTokenPath = app.node.tryGetContext("oauthTokenPath")
 const sourceRepoOwner = app.node.tryGetContext("sourceRepoOwner")
+const sourceRepoUser = app.node.tryGetContext("sourceRepoUser")
 const sourceRepository = app.node.tryGetContext("sourceRepository")
 const sourceBranch = app.node.tryGetContext("sourceBranch")
 const networkStackName = app.node.tryGetContext("networkStackName")
@@ -17,6 +18,7 @@ const notifyStackName = app.node.tryGetContext("notifyStackName")
 const service = new SfxDeployPipelineStack(app, 'SfxDeploy', {
     oauthTokenPath,
     sourceRepoOwner,
+    sourceRepoUser,
     sourceRepository,
     sourceBranch,
     networkStackName,

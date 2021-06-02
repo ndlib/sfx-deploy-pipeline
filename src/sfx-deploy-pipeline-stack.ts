@@ -11,6 +11,7 @@ import { ArtifactBucket, SlackApproval } from '@ndlib/ndlib-cdk'
 export interface SfxPipelineStackProps extends StackProps {
   readonly oauthTokenPath: string
   readonly sourceRepoOwner: string
+  readonly sourceRepoUser: string
   readonly sourceRepository: string
   readonly sourceBranch: string
   readonly owner: string
@@ -88,6 +89,11 @@ export class SfxDeployPipelineStack extends Stack {
                 'pwd',
                 'cd $CODEBUILD_SRC_DIR/',
                 'pwd',
+                'git init',
+                'git remote add origin $REPO_URL',
+                'git fetch',
+                'git reset $CODEBUILD_RESOLVED_SOURCE_VERSION',
+                'git diff',
                 'nc -w 5 $REMOTE_HOST $REMOTE_PORT && sshpass -e rsync -a -e "ssh -oStrictHostKeyChecking=no -p $REMOTE_PORT" $LOCAL_PATH/ $REMOTE_USER@$REMOTE_HOST:$REMOTE_PATH',
               ]
             }
@@ -99,6 +105,14 @@ export class SfxDeployPipelineStack extends Stack {
           computeType: codebuild.ComputeType.SMALL,
         },
         environmentVariables: {
+          REPO_URL: {
+            value: `https://${props.sourceRepoUser}:$REPO_PASS@github.com/${props.sourceRepoOwner}/${props.sourceRepository}`,
+            type: codebuild.BuildEnvironmentVariableType.PLAINTEXT,
+          },
+          REPO_PASS: {
+            value: `${props.oauthTokenPath}:oauth`,
+            type: codebuild.BuildEnvironmentVariableType.SECRETS_MANAGER,
+          },
           LOCAL_PATH: {
             value: `/all/sfx/ftp/localpath`,
             type: codebuild.BuildEnvironmentVariableType.PARAMETER_STORE,
